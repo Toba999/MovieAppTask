@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Pop Flake</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_settings">Settings</string>
+    <string name="top_rated_movies">Top Rated Movies</string>
+    <string name="coming_soon_movies">Coming Soon Movies</string>
+    <string name="in_theater_movies">In Theater Movies</string>
+    <string name="box_office_movies">Box Office Movies</string>
+</resources>
