@@ -10,11 +10,9 @@ import com.example.pop_flake.data.pojo.TopRatedMovie
 @Database(entities = [
     TopRatedMovie::class,
     ComingSoonMovie::class,
-    InTheaterMovie::class,
-    BoxOfficeMovie::class], version = 1)
+    InTheaterMovie::class], version = 1)
 abstract class MovieDatabase : RoomDatabase() {
     abstract fun topMoviesDao(): TopMoviesDao
     abstract fun comingSoonMovieDao(): ComingSoonDao
     abstract fun inTheaterMovieDao(): InTheaterDao
-    abstract fun boxOfficeMoviesDao(): BoxMoviesDao
 }

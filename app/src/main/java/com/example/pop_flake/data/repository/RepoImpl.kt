@@ -14,7 +14,7 @@ import timber.log.Timber
 
 class RepoImpl (private val apiService: ApiService,private val database: MovieDatabase) : Repo {
 
-        override suspend fun getTopRatedMovies(token: String): Flow<ResponseState<TopMoviesResponse>> {
+        override  fun getTopRatedMovies(token: String): Flow<ResponseState<TopMoviesResponse>> {
             return flow {
                 emit(ResponseState.Loading)
                 val response = apiService.getTopRatedMovies(token)
@@ -32,7 +32,7 @@ class RepoImpl (private val apiService: ApiService,private val database: MovieDa
             }
         }
 
-        override suspend fun getInTheatersMovies(token: String): Flow<ResponseState<InTheaterResponse>> {
+        override  fun getInTheatersMovies(token: String): Flow<ResponseState<InTheaterResponse>> {
             return flow {
                 emit(ResponseState.Loading)
                 val response = apiService.getInTheatersMovies(token)
@@ -50,7 +50,7 @@ class RepoImpl (private val apiService: ApiService,private val database: MovieDa
             }
         }
 
-        override suspend fun getComingSoonMovies(token: String): Flow<ResponseState<ComingSoonResponse>> {
+        override fun getComingSoonMovies(token: String): Flow<ResponseState<ComingSoonResponse>> {
             return flow {
                 emit(ResponseState.Loading)
                 val response = apiService.getComingSoonMovies(token)
@@ -68,7 +68,7 @@ class RepoImpl (private val apiService: ApiService,private val database: MovieDa
             }
         }
 
-    override suspend fun getBoxOfficeMovies(token: String): Flow<ResponseState<BoxOfficeResponse>> {
+    override fun getBoxOfficeMovies(token: String): Flow<ResponseState<BoxOfficeResponse>> {
         return flow {
             emit(ResponseState.Loading)
             val response = apiService.getBoxOfficeMovies(token)
@@ -76,7 +76,6 @@ class RepoImpl (private val apiService: ApiService,private val database: MovieDa
                 val movies = response.body()
                 if (movies != null) {
                     emit(ResponseState.Success(movies))
-                    database.boxOfficeMoviesDao().insertMovies(movies.items)
                 } else {
                     emit(ResponseState.Error("No movies found"))
                 }
@@ -86,7 +85,7 @@ class RepoImpl (private val apiService: ApiService,private val database: MovieDa
         }
     }
 
-    override suspend fun searchMovies(query: String,token: String): Flow<ResponseState<SearchResponse>> {
+    override fun searchMovies(query: String,token: String): Flow<ResponseState<SearchResponse>> {
             return flow {
                 emit(ResponseState.Loading)
                 val response = apiService.getSearchMovies(token, query)

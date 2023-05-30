@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-open class DataStoreManager @Inject constructor(@ApplicationContext var context: Context) {
+ class DataStoreManager @Inject constructor(@ApplicationContext var context: Context) {
 
     private val dataStore: DataStore<Preferences> = context.createDataStore(name = "data_store")
 
