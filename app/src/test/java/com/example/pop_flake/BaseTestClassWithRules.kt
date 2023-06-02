@@ -1,9 +1,13 @@
 package com.example.pop_flake
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import org.junit.Rule
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
+import java.util.concurrent.CountDownLatch
 
 
 open class BaseTestClassWithRules :BaseTest(){
@@ -72,6 +76,33 @@ open class BaseTestClassWithRules :BaseTest(){
             is Long ->field.setLong(null , value)
             is Short ->field.setShort(null , value)
             else ->field.set(null , value)
+        }
+    }
+    inline fun <reified T : Any> Flow<T>.testFlowObserver(testScope: CoroutineScope): FlowTestObserver<T> {
+        return FlowTestObserver<T>().also { observer ->
+            testScope.launch {
+                collect { value -> observer.onChanged(value) }
+            }
+        }
+    }
+
+
+    class FlowTestObserver<T> {
+        private val latch = CountDownLatch(1)
+        private val values = mutableListOf<T>()
+
+        fun onChanged(newValue: T) {
+            values.add(newValue)
+            latch.countDown()
+        }
+
+        suspend fun awaitValue(): T {
+            if (values.isNotEmpty()) {
+                return values.last()
+            }
+
+            latch.await()
+            return values.last()
         }
     }
 }

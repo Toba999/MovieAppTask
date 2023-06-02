@@ -12,21 +12,21 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
- class DataStoreManager @Inject constructor(@ApplicationContext var context: Context) {
+ class DataStoreManager @Inject constructor(@ApplicationContext var context: Context) : DataStoreManagerInterface {
 
     private val dataStore: DataStore<Preferences> = context.createDataStore(name = "data_store")
 
-    suspend fun setInt(key:String,value:Int){
+    override suspend fun setInt(key:String, value:Int){
         dataStore.setValue(preferencesKey(key),value)
     }
 
-    fun getInt(key:String,defaultValue:Int)= dataStore.getValueFlow(preferencesKey(key),defaultValue)
+    override fun getInt(key: String, defaultValue:Int)= dataStore.getValueFlow(preferencesKey(key),defaultValue)
 
-    suspend fun setString(key:String,value:String){
+    override suspend fun setString(key:String, value:String){
         dataStore.setValue(preferencesKey(key),value)
     }
 
-    fun getString(key:String,defaultValue:String)= dataStore.getValueFlow(preferencesKey(key),defaultValue)
+    override fun getString(key:String, defaultValue:String)= dataStore.getValueFlow(preferencesKey(key),defaultValue)
 }
 
 

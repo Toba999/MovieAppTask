@@ -1,11 +1,10 @@
 package com.example.pop_flake.ui.settings
 
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pop_flake.data.local.DataStoreManager
+import com.example.pop_flake.data.local.DataStoreManagerInterface
 import com.example.pop_flake.data.pojo.ComplaintModel
 import com.example.pop_flake.data.pojo.SettingsState
 import com.example.pop_flake.utils.Constants.DARK_MODE_KEY
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(private val dataStoreManager: DataStoreManager): ViewModel() {
+class SettingsViewModel @Inject constructor(private val dataStoreManager: DataStoreManagerInterface): ViewModel() {
 
 
      val _state = MutableStateFlow(SettingsState())

@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.pop_flake.data.local.ComingSoonDao
+import com.example.pop_flake.data.local.DataStoreManager
+import com.example.pop_flake.data.local.DataStoreManagerInterface
 import com.example.pop_flake.data.local.HelperSharedPreferences
 import com.example.pop_flake.data.local.InTheaterDao
 import com.example.pop_flake.data.local.MovieDatabase
@@ -22,6 +24,11 @@ object LocalModule {
     @Singleton
     fun provideHelperSharedPreferences(@ApplicationContext context: Context): HelperSharedPreferences {
         return HelperSharedPreferences(context)
+    }
+    @Provides
+    @Singleton
+    fun provideDataStoreManager(@ApplicationContext context: Context): DataStoreManagerInterface {
+        return DataStoreManager(context)
     }
 
     @Provides
