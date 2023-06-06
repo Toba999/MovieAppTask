@@ -1,11 +1,11 @@
-package com.example.pop_flake
+package com.example.pop_flake.repositoryTest
 
+import com.example.pop_flake.BaseTestClassWithRules
 import com.example.pop_flake.data.local.ComingSoonDao
 import com.example.pop_flake.data.local.InTheaterDao
 import com.example.pop_flake.data.local.MovieDatabase
 import com.example.pop_flake.data.local.TopMoviesDao
 import com.example.pop_flake.data.pojo.BoxOfficeResponse
-import com.example.pop_flake.data.pojo.ComingSoonMovie
 import com.example.pop_flake.data.pojo.ComingSoonResponse
 import com.example.pop_flake.data.pojo.InTheaterResponse
 import com.example.pop_flake.data.pojo.SearchResponse
@@ -15,18 +15,12 @@ import com.example.pop_flake.data.remote.ResponseState
 import com.example.pop_flake.data.repository.Repo
 import com.example.pop_flake.data.repository.RepoImpl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations

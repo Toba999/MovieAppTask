@@ -40,9 +40,6 @@ class SettingsViewModelTest : BaseTestClassWithRules() {
     val instantExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var context :Context
-
-    @Mock
     private lateinit var dataStoreManager: DataStoreManagerInterface
 
     private lateinit var viewModel: SettingsViewModel
@@ -63,7 +60,12 @@ class SettingsViewModelTest : BaseTestClassWithRules() {
         val initialState = SettingsState()
 
         // Mock the DataStore response
-        `when`(dataStoreManager.getInt(DARK_MODE_KEY, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)).thenReturn(flowOf(darkModeOption))
+        `when`(
+            dataStoreManager.getInt(
+                DARK_MODE_KEY,
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            )
+        ).thenReturn(flowOf(darkModeOption))
 
         // Set the initial state
         viewModel._state.value = initialState
@@ -77,7 +79,10 @@ class SettingsViewModelTest : BaseTestClassWithRules() {
         // Verify that the state was updated with the expected value
         val updatedState = viewModel.state.first()
         assertEquals(darkModeOption, updatedState.darkModeOption)
-        assertEquals(initialState.list, updatedState.list) // Verify that other properties remain unchanged
+        assertEquals(
+            initialState.list,
+            updatedState.list
+        ) // Verify that other properties remain unchanged
     }
 
     @After
@@ -85,7 +90,6 @@ class SettingsViewModelTest : BaseTestClassWithRules() {
         Dispatchers.resetMain()
         testScope.cleanupTestCoroutines()
     }
-
 
 
 }
