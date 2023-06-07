@@ -79,6 +79,40 @@ class HomeViewModelTest {
         // Verify that the repo's getTopRatedMovies method was called with the correct token
         coVerify { repo.getTopRatedMovies("test_token") }
     }
+    @Test
+    fun `test getTopRatedMovies Failure`() = testScope.runBlockingTest {
+
+        val successResponseState = ResponseState.Error("Error Fetching data")
+
+        coEvery { repo.getTopRatedMovies(any()) } returns flowOf(successResponseState)
+
+        viewModel.getTopRatedMovies()
+
+        val value = viewModel.topRatedMoviesLiveData.getOrAwaitValueTest()
+
+        assertEquals(value, ResponseState.Error("Error Fetching data"))
+
+        // Verify that the repo's getTopRatedMovies method was called with the correct token
+        coVerify { repo.getTopRatedMovies("test_token") }
+    }
+    @Test
+    fun `test getTopRatedMovies EmptyData Recieved`() = testScope.runBlockingTest {
+
+        val successResponseState = ResponseState.Success(TopMoviesResponse("No Data Found",
+            listOf()
+        ))
+
+        coEvery { repo.getTopRatedMovies(any()) } returns flowOf(successResponseState)
+
+        viewModel.getTopRatedMovies()
+
+        val value = viewModel.topRatedMoviesLiveData.getOrAwaitValueTest()
+
+        assertEquals(value, ResponseState.Error("No Data Found"))
+
+        // Verify that the repo's getTopRatedMovies method was called with the correct token
+        coVerify { repo.getTopRatedMovies("test_token") }
+    }
 
 
     //same for the remain funs
