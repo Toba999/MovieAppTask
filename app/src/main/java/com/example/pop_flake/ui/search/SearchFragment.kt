@@ -1,14 +1,11 @@
 package com.example.pop_flake.ui.search
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +30,7 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModels()
 
-    lateinit var searchAdapter:SearchAdapter
+    private lateinit var searchAdapter:SearchAdapter
     @Inject
     lateinit var networkChangeReceiver: NetworkChangeReceiver
 
