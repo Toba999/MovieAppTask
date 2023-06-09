@@ -8,9 +8,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.pop_flake.data.local.ComingSoonDao
-import com.example.pop_flake.data.local.InTheaterDao
-import com.example.pop_flake.data.local.TopMoviesDao
 import com.example.pop_flake.data.pojo.BoxOfficeMovie
 import com.example.pop_flake.data.pojo.ComingSoonMovie
 import com.example.pop_flake.data.pojo.InTheaterMovie
@@ -32,9 +29,9 @@ import javax.inject.Named
 class HomeViewModel @Inject constructor(
     private val repo: Repo,
     @Named("auth_token") private val token: String,
-    @Named("TopMoviePaging") private val topMoviePagingSource: TopMoviePagingSource,
-    @Named("ComingMoviePaging") private val comingMoviePagingSource: ComingSoonPagingSource,
-    @Named("TheaterMoviePaging") private val theaterMoviePagingSource: InTheaterPagingSource
+    private val topMoviePagingSource: TopMoviePagingSource,
+    private val comingMoviePagingSource: ComingSoonPagingSource,
+    private val theaterMoviePagingSource: InTheaterPagingSource
     )
     : ViewModel() {
 
